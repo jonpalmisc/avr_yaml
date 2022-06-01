@@ -1,0 +1,143 @@
+id,mnem,ops,description,lhs,op,rhs,flags
+1,add,"Rd, Rr",Add without carry,Rd,set,Rd + Rr,"Z, C, N, V, S, H"
+2,adc,"Rd, Rr",Add with carry,Rd,set,Rd + Rr + C,"Z, C, N, V, S, H"
+3,adiw,"Rd, K",Add immediate to word,Rd,set,Rd + 1:Rd + K,"Z, C, N, V, S"
+4,sub,"Rd, Rr",Subtract without carry,Rd,set,Rd - Rr,"Z, C, N, V, S, H"
+5,subi,"Rd, K",Subtract immediate,Rd,set,Rd - K,"Z, C, N, V, S, H"
+6,sbc,"Rd, Rr",Subtract with carry,Rd,set,Rd - Rr - C,"Z, C, N, V, S, H"
+7,sbci,"Rd, K",Subtract immediate with carry,Rd,set,Rd - K - C,"Z, C, N, V, S, H"
+8,sbiw,"Rd, K",Subtract immediate from word,Rd + 1:Rd,set,Rd + 1:Rd - K,"Z, C, N, V, S"
+9,and,"Rd, Rr",Logical AND,Rd,set,Rd * Rr,"Z, N, V, S"
+10,andi,"Rd, K",Logical AND with immediate,Rd,set,Rd * K,"Z, N, V, S"
+11,or,"Rd, Rr",Logical OR,Rd,set,Rd | Rr,"Z, N, V, S"
+12,ori,"Rd, K",Logical OR with immediate,Rd,set,Rd | K,"Z, N, V, S"
+13,eor,"Rd, Rr",Exclusive OR,Rd,set,Rd ⊕ Rr,"Z, N, V, S"
+14,com,Rd,One’s complement,Rd,set,$FF - Rd,"Z, C, N, V, S"
+15,neg,Rd,Two’s complement,Rd,set,$00 - Rd,"Z, C, N, V, S, H"
+16,sbr,"Rd, K",Set bit(s) in register,Rd,set,Rd | K,"Z, N, V, S"
+17,cbr,"Rd, K",Clear bit(s) in register,Rd,set,Rd * ($FFh - K),"Z, N, V, S"
+18,inc,Rd,Increment,Rd,set,Rd + 1,"Z, N, V, S"
+19,dec,Rd,Decrement,Rd,set,Rd - 1,"Z, N, V, S"
+20,tst,Rd,Test for zero or minus,Rd,set,Rd * Rd,"Z, N, V, S"
+21,clr,Rd,Clear register,Rd,set,Rd && Rd,"Z, N, V, S"
+22,ser,Rd,Set register,Rd,set,$FF,
+23,mul,"Rd, Rr",Multiply unsigned,R1:R0,set,Rd * Rr (UU),"Z, C"
+24,muls,"Rd, Rr",Multiply signed,R1:R0,set,Rd * Rr (SS),"Z, C"
+25,mulsu,"Rd, Rr",Multiply signed with unsigned,R1:R0,set,Rd * Rr (SU),"Z, C"
+26,fmul,"Rd, Rr",Fractional multiply unsigned,R1:R0,set,Rd * Rr<<1 (UU),"Z, C"
+27,fmuls,"Rd, Rr",Fractional multiply signed,R1:R0,set,Rd * Rr<<1 (SS),"Z, C"
+28,fmulsu,"Rd, Rr",Fractional multiply signed with unsigned,R1:R0,set,Rd * Rr<<1 (SU),"Z, C"
+29,des,K,Data encryption,if (H == 0) R15:R0; if (H == 1) R15:R0,set; set,"Encrypt(R15: R0, K); Decrypt(R15: R0, K)",
+30,rjmp,k,Relative jump,PC,set,PC + k + 1,
+31,ijmp,,Indirect jump to (Z),PC(15:0); PC(21:16),set; set,Z; 0,
+32,eijmp,,Extended indirect jump to (Z),PC(15:0); PC(21:16),set; set,Z; EIND,
+33,jmp,k,Jump,PC,set,k,
+34,rcall,k,Relative call subroutine,PC,set,PC + k + 1,
+35,icall,,Indirect call to (Z),PC(15:0); PC(21:16),set; set,Z; 0,
+36,eicall,,Extended indirect call to (Z),PC(15:0); PC(21:16),set; set,Z; EIND,
+37,call,k,Call subroutine,PC,set,k,
+38,ret,,Subroutine return,PC,set,STACK,
+39,reti,,Interrupt return,PC,set,STACK,I
+40,cpse,"Rd, Rr","Compare, skip if equal",if (Rd == Rr) PC,set,PC + 2 or 3,
+41,cp,"Rd, Rr",Compare,Rd - Rr,,,"Z, C, N, V, S, H"
+42,cpc,"Rd, Rr",Compare with carry,Rd - Rr - C,,,"Z, C, N, V, S, H"
+43,cpi,"Rd, K",Compare with immediate,Rd - K,,,"Z, C, N, V, S, H"
+44,sbrc,"Rr, b",Skip if bit in register cleared,if (Rr(b) == 0) PC,set,PC + 2 or 3,
+45,sbrs,"Rr, b",Skip if bit in register set,if (Rr(b) == 1) PC,set,PC + 2 or 3,
+46,sbic,"A, b",Skip if bit in I/O register cleared,"if (IO(A, b) == 0) PC",set,PC + 2 or 3,
+47,sbis,"A, b",Skip if bit in I/O register set,"If (IO(A, b) == 1) PC",set,PC + 2 or 3,
+48,brbs,"s, k",Branch if status flag set,if (SREG(s) == 1) PC,set,PC + k + 1,
+49,brbc,"s, k",Branch if status flag cleared,if (SREG(s) == 0) PC,set,PC + k + 1,
+50,breq,k,Branch if equal,if (Z == 1) PC,set,PC + k + 1,
+51,brne,k,Branch if not equal,if (Z == 0) PC,set,PC + k + 1,
+52,brcs,k,Branch if carry set,if (C == 1) PC,set,PC + k + 1,
+53,brcc,k,Branch if carry cleared,if (C == 0) PC,set,PC + k + 1,
+54,brsh,k,Branch if same or higher,if (C == 0) PC,set,PC + k + 1,
+55,brlo,k,Branch if lower,if (C == 1) PC,set,PC + k + 1,
+56,brmi,k,Branch if minus,if (N == 1) PC,set,PC + k + 1,
+57,brpl,k,Branch if plus,if (N == 0) PC,set,PC + k + 1,
+58,brge,k,"Branch if greater or equal, signed",if (N ^ V == 0) PC,set,PC + k + 1,
+59,brlt,k,"Branch if less than, signed",if (N ^ V == 1) PC,set,PC + k + 1,
+60,brhs,k,Branch if half carry flag set,if (H == 1) PC,set,PC + k + 1,
+61,brhc,k,Branch if half carry flag cleared,if (H == 0) PC,set,PC + k + 1,
+62,brts,k,Branch if T flag set,if (T == 1) PC,set,PC + k + 1,
+63,brtc,k,branch if T flag cleared,if (T == 0) PC,set,PC + k + 1,
+64,brvs,k,Branch if overflow flag is set,if (V == 1) PC,set,PC + k + 1,
+65,brvc,k,Branch if overflow flag is cleared,if (V == 0) PC,set,PC + k + 1,
+66,brie,k,Branch if interrupt enabled,if (I == 1) PC,set,PC + k + 1,
+67,brid,k,Branch if interrupt disabled,if (I == 0) PC,set,PC + k + 1,
+68,mov,"Rd, Rr",Copy register,Rd,set,Rr,
+69,movw,"Rd, Rr",Copy register pair,Rd+1:Rd,set,Rr+1:Rr,
+70,ldi,"Rd, K",Load immediate,Rd,set,K,
+71,lds,"Rd, k",Load direct from data space,Rd,set,(k),
+72,ld,"Rd, X",Load indirect,Rd,set,(X),
+73,ld,"Rd, X+",Load indirect and post-increment,Rd; X,set; set,(X); X + 1,
+74,ld,"Rd, -X",Load indirect and pre-decrement,X; Rd,set; set,X - 1; (X),
+75,ld,"Rd, Y",Load indirect,Rd,set,(Y),
+76,ld,"Rd, Y+",Load indirect and post-increment,Rd; Y,set; set,(Y); Y + 1,
+77,ld,"Rd, -Y",Load indirect and pre-decrement,Y; Rd,set; set,Y - 1; (Y),
+78,ldd,"Rd, Y+q",Load indirect with displacement,Rd,set,(Y + q),
+79,ld,"Rd, Z",Load indirect,Rd,set,(Z),
+80,ld,"Rd, Z+",Load indirect and post-increment,Rd; Z,set; set,(Z); Z+1,
+81,ld,"Rd, -Z",Load indirect and pre-decrement,Z; Rd,set; set,Z - 1; (Z),
+82,ldd,"Rd, Z+q",Load indirect with displacement,Rd,set,(Z + q),
+83,sts,"k, Rr",Store direct to data space,(k),set,Rd,
+84,st,"X, Rr",Store indirect,(X),set,Rr,
+85,st,"X+, Rr",Store indirect and post-increment,(X); X,set; set,Rr; X + 1,
+86,st,"-X, Rr",Store indirect and pre-decrement,X; (X),set; set,X - 1; Rr,
+87,st,"Y, Rr",Store indirect,(Y),set,Rr,
+88,st,"Y+, Rr",Store indirect and post-increment,(Y); Y,set; set,Rr; Y + 1,
+89,st,"-Y, Rr",Store indirect and pre-decrement,Y; (Y),set; set,Y - 1; Rr,
+90,std,"Y+q, Rr",Store indirect with displacement,(Y+q),set,Rr,
+91,st,"Z, Rr",Store indirect,(Z),set,Rr,
+92,st,"Z+, Rr",Store indirect and post-increment,(Z); Z,set; set,Rr; Z + 1,
+93,st,"-Z, Rr",Store indirect and pre-decrement,Z,set,Z - 1,
+94,std,"Z+q, Rr",Store indirect with displacement,(Z+q),set,Rr,
+95,lpm,,Load program memory,R0,set,(Z),
+96,lpm,"Rd, Z",Load program memory,Rd,set,(Z),
+97,lpm,"Rd, Z+",Load program memory and post-increment,Rd; Z,set; set,(Z); Z + 1,
+98,elpm,,Extended load program memory,R0,set,(RAMPZ:Z),
+99,elpm,"Rd, Z",Extended load program memory,Rd,set,(RAMPZ:Z),
+100,elpm,"Rd, Z+",Extended load program memory and post-increment,Rd; (RAMPZ:Z),set; set,(RAMPZ:Z); (RAMPZ:Z) + 1,
+101,spm,,Store program memory,(RAMPZ:Z),set,R1:R0,
+102,spm,Z+,Store program memory and post-increment by 2,(RAMPZ:Z); Z,set; set,R1:R0; Z + 2,
+103,in,"Rd, A",In from I/O location,Rd,set,IO(A),
+104,out,"A, Rr",Out to I/O location,IO(A),set,Rr,
+105,push,Rr,Push register on stack,STACK,set,Rr,
+106,pop,Rd,Pop register from stack,Rd,set,STACK,
+107,xch,"Z, Rd",Exchange,(Z); Rd,set; set,Rd; (Z),
+108,las,"Z, Rd",Load and set,(Z); Rd,set; set,Rd v (Z); (Z),
+109,lac,"Z, Rd",Load and clear,(Z); Rd,set; set,($FF - Rd) & (Z); (Z),
+110,lat,"Z, Rd",Load and toggle,(Z); Rd,set; set,Rd ^ (Z); (Z),
+111,lsl,Rd,Logical shift left,Rd(n+1); Rd(0); C,set; set; set,Rd(n); 0; Rd(7),"Z, C, N, V, H"
+112,lsr,Rd,Logical shift right,Rd(n); Rd(7); C,set; set; set,Rd(n+1); 0; Rd(0),"Z, C, N, V"
+113,rol,Rd,Rotate left through carry,Rd(0); Rd(n+1); C,set; set; set,C; Rd(n); Rd(7),"Z, C, N, V, H"
+114,ror,Rd,Rotate right through carry,Rd(7); Rd(n); C,set; set; set,C; Rd(n+1); Rd(0),"Z, C, N, V"
+115,asr,Rd,Arithmetic shift right,Rd(n),set,"Rd(n+1), n=0..6","Z, C, N, V"
+116,swap,Rd,Swap nibbles,Rd(3..0),swap,Rd(7..4),
+117,sbi,"A, b",Set bit in I/O register,"IO(A, b)",set,1,
+118,cbi,"A, b",Clear bit in I/O register,"IO(A, b)",set,0,
+119,bst,"Rr, b",Bit store from register to T,T,set,Rr(b),T
+120,bld,"Rd, b",Bit load from T to register,Rd(b),set,T,
+121,bset,s,Flag set,SREG(s),set,1,SREG(s)
+122,bclr,s,Flag clear,SREG(s),set,0,SREG(s)
+123,sec,,Set carry,C,set,1,C
+124,clc,,Clear carry,C,set,0,C
+125,sen,,Set negative flag,N,set,1,N
+126,cln,,Clear negative flag,N,set,0,N
+127,sez,,Set zero flag,Z,set,1,Z
+128,clz,,Clear zero flag,Z,set,0,Z
+129,sei,,Global interrupt enable,I,set,1,I
+130,cli,,Global interrupt disable,I,set,0,I
+131,ses,,Set signed test flag,S,set,1,S
+132,cls,,Clear signed test flag,S,set,0,S
+133,sev,,Set two’s complement overflow,V,set,1,V
+134,clv,,Clear two’s complement overflow,V,set,0,V
+135,set,,Set T in SREG,T,set,1,T
+136,clt,,Clear T in SREG,T,set,0,T
+137,seh,,Set half carry flag in SREG,H,set,1,H
+138,clh,,Clear half carry flag in SREG,H,set,0,H
+139,break,,Break,,,,
+140,nop,,No operation,,,,
+141,sleep,,Sleep,,,,
+142,wdr,,Watchdog reset,,,,
