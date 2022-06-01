@@ -1,0 +1,2278 @@
+- id: 1
+  mnem: add
+  desc: Add without carry
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd + Rr
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 2
+  mnem: adc
+  desc: Add with carry
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd + Rr + C
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 3
+  mnem: adiw
+  desc: Add immediate to word
+  type: math
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd+1:Rd + K
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+
+- id: 4
+  mnem: sub
+  desc: Subtract without carry
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd - Rr
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 5
+  mnem: subi
+  desc: Subtract immediate
+  type: math
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd - K
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 6
+  mnem: sbc
+  desc: Subtract with carry
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd - Rr - C
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 7
+  mnem: sbci
+  desc: Subtract immediate with carry
+  type: math
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd - K - C
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 8
+  mnem: sbiw
+  desc: Subtract immediate from word
+  type: math
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd+1:Rd
+  op:
+  - set
+  rhs:
+  - Rd+1:Rd - K
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+
+- id: 9
+  mnem: and
+  desc: Logical AND
+  type: logic
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd & Rr
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 10
+  mnem: andi
+  desc: Logical AND with immediate
+  type: logic
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd & K
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 11
+  mnem: or
+  desc: Logical OR
+  type: logic
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd | Rr
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 12
+  mnem: ori
+  desc: Logical OR with immediate
+  type: logic
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd | K
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 13
+  mnem: eor
+  desc: Exclusive OR
+  type: logic
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd ^ Rr
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 14
+  mnem: com
+  desc: "One\u2019s complement"
+  type: logic
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - $FF - Rd
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+
+- id: 15
+  mnem: neg
+  desc: "Two\u2019s complement"
+  type: logic
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - $00 - Rd
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 16
+  mnem: sbr
+  desc: Set bit(s) in register
+  type: logic
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd | K
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 17
+  mnem: cbr
+  desc: Clear bit(s) in register
+  type: logic
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd & ($FF - K)
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 18
+  mnem: inc
+  desc: Increment
+  type: math
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd + 1
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 19
+  mnem: dec
+  desc: Decrement
+  type: math
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd - 1
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 20
+  mnem: tst
+  desc: Test for zero or minus
+  type: logic
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd && Rd
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 21
+  mnem: clr
+  desc: Clear register
+  type: logic
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rd ^ Rd
+  flags:
+  - Z
+  - N
+  - V
+  - S
+
+- id: 22
+  mnem: ser
+  desc: Set register
+  type: logic
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - $FF
+  flags: null
+
+- id: 23
+  mnem: mul
+  desc: Multiply unsigned
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - R1:R0
+  op:
+  - set
+  rhs:
+  - Rd * Rr (UU)
+  flags:
+  - Z
+  - C
+
+- id: 24
+  mnem: muls
+  desc: Multiply signed
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - R1:R0
+  op:
+  - set
+  rhs:
+  - Rd * Rr (SS)
+  flags:
+  - Z
+  - C
+
+- id: 25
+  mnem: mulsu
+  desc: Multiply signed with unsigned
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - R1:R0
+  op:
+  - set
+  rhs:
+  - Rd * Rr (SU)
+  flags:
+  - Z
+  - C
+
+- id: 26
+  mnem: fmul
+  desc: Fractional multiply unsigned
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - R1:R0
+  op:
+  - set
+  rhs:
+  - Rd * Rr << 1 (UU)
+  flags:
+  - Z
+  - C
+
+- id: 27
+  mnem: fmuls
+  desc: Fractional multiply signed
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - R1:R0
+  op:
+  - set
+  rhs:
+  - Rd * Rr << 1 (SS)
+  flags:
+  - Z
+  - C
+
+- id: 28
+  mnem: fmulsu
+  desc: Fractional multiply signed with unsigned
+  type: math
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - R1:R0
+  op:
+  - set
+  rhs:
+  - Rd * Rr << 1 (SU)
+  flags:
+  - Z
+  - C
+
+- id: 29
+  mnem: des
+  desc: Data encryption
+  type: crypto
+  ops:
+  - K
+  lhs:
+  - if (H == 0) R15:R0
+  - if (H == 1) R15:R0
+  op:
+  - set
+  - set
+  rhs:
+  - 'Encrypt(R15: R0, K)'
+  - 'Decrypt(R15: R0, K)'
+  flags: null
+
+- id: 30
+  mnem: rjmp
+  desc: Relative jump
+  type: branch
+  ops:
+  - k
+  lhs:
+  - PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 31
+  mnem: ijmp
+  desc: Indirect jump to (Z)
+  type: branch
+  ops: null
+  lhs:
+  - PC(15:0)
+  - PC(21:16)
+  op:
+  - set
+  - set
+  rhs:
+  - Z
+  - '0'
+  flags: null
+
+- id: 32
+  mnem: eijmp
+  desc: Extended indirect jump to (Z)
+  type: branch
+  ops: null
+  lhs:
+  - PC(15:0)
+  - PC(21:16)
+  op:
+  - set
+  - set
+  rhs:
+  - Z
+  - EIND
+  flags: null
+
+- id: 33
+  mnem: jmp
+  desc: Jump
+  type: branch
+  ops:
+  - k
+  lhs:
+  - PC
+  op:
+  - set
+  rhs:
+  - k
+  flags: null
+
+- id: 34
+  mnem: rcall
+  desc: Relative call subroutine
+  type: branch
+  ops:
+  - k
+  lhs:
+  - PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 35
+  mnem: icall
+  desc: Indirect call to (Z)
+  type: branch
+  ops: null
+  lhs:
+  - PC(15:0)
+  - PC(21:16)
+  op:
+  - set
+  - set
+  rhs:
+  - Z
+  - '0'
+  flags: null
+
+- id: 36
+  mnem: eicall
+  desc: Extended indirect call to (Z)
+  type: branch
+  ops: null
+  lhs:
+  - PC(15:0)
+  - PC(21:16)
+  op:
+  - set
+  - set
+  rhs:
+  - Z
+  - EIND
+  flags: null
+
+- id: 37
+  mnem: call
+  desc: Call subroutine
+  type: branch
+  ops:
+  - k
+  lhs:
+  - PC
+  op:
+  - set
+  rhs:
+  - k
+  flags: null
+
+- id: 38
+  mnem: ret
+  desc: Subroutine return
+  type: branch
+  ops: null
+  lhs:
+  - PC
+  op:
+  - set
+  rhs:
+  - STACK
+  flags: null
+
+- id: 39
+  mnem: reti
+  desc: Interrupt return
+  type: branch
+  ops: null
+  lhs:
+  - PC
+  op:
+  - set
+  rhs:
+  - STACK
+  flags:
+  - I
+
+- id: 40
+  mnem: cpse
+  desc: Compare, skip if equal
+  type: branch
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - if (Rd == Rr) PC
+  op:
+  - set
+  rhs:
+  - PC + (2 or 3)
+  flags: null
+
+- id: 41
+  mnem: cp
+  desc: Compare
+  type: branch
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd - Rr
+  op: null
+  rhs: null
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 42
+  mnem: cpc
+  desc: Compare with carry
+  type: branch
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd - Rr - C
+  op: null
+  rhs: null
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 43
+  mnem: cpi
+  desc: Compare with immediate
+  type: branch
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd - K
+  op: null
+  rhs: null
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - S
+  - H
+
+- id: 44
+  mnem: sbrc
+  desc: Skip if bit in register cleared
+  type: branch
+  ops:
+  - Rr
+  - b
+  lhs:
+  - if (Rr(b) == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + (2 or 3)
+  flags: null
+
+- id: 45
+  mnem: sbrs
+  desc: Skip if bit in register set
+  type: branch
+  ops:
+  - Rr
+  - b
+  lhs:
+  - if (Rr(b) == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + (2 or 3)
+  flags: null
+
+- id: 46
+  mnem: sbic
+  desc: Skip if bit in I/O register cleared
+  type: branch
+  ops:
+  - A
+  - b
+  lhs:
+  - if (IO(A, b) == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + (2 or 3)
+  flags: null
+
+- id: 47
+  mnem: sbis
+  desc: Skip if bit in I/O register set
+  type: branch
+  ops:
+  - A
+  - b
+  lhs:
+  - If (IO(A, b) == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + (2 or 3)
+  flags: null
+
+- id: 48
+  mnem: brbs
+  desc: Branch if status flag set
+  type: branch
+  ops:
+  - s
+  - k
+  lhs:
+  - if (SREG(s) == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 49
+  mnem: brbc
+  desc: Branch if status flag cleared
+  type: branch
+  ops:
+  - s
+  - k
+  lhs:
+  - if (SREG(s) == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 50
+  mnem: breq
+  desc: Branch if equal
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (Z == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 51
+  mnem: brne
+  desc: Branch if not equal
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (Z == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 52
+  mnem: brcs
+  desc: Branch if carry set
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (C == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 53
+  mnem: brcc
+  desc: Branch if carry cleared
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (C == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 54
+  mnem: brsh
+  desc: Branch if same or higher
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (C == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 55
+  mnem: brlo
+  desc: Branch if lower
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (C == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 56
+  mnem: brmi
+  desc: Branch if minus
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (N == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 57
+  mnem: brpl
+  desc: Branch if plus
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (N == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 58
+  mnem: brge
+  desc: Branch if greater or equal, signed
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (N ^ V == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 59
+  mnem: brlt
+  desc: Branch if less than, signed
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (N ^ V == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 60
+  mnem: brhs
+  desc: Branch if half carry flag set
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (H == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 61
+  mnem: brhc
+  desc: Branch if half carry flag cleared
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (H == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 62
+  mnem: brts
+  desc: Branch if T flag set
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (T == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 63
+  mnem: brtc
+  desc: branch if T flag cleared
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (T == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 64
+  mnem: brvs
+  desc: Branch if overflow flag is set
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (V == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 65
+  mnem: brvc
+  desc: Branch if overflow flag is cleared
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (V == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 66
+  mnem: brie
+  desc: Branch if interrupt enabled
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (I == 1) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 67
+  mnem: brid
+  desc: Branch if interrupt disabled
+  type: branch
+  ops:
+  - k
+  lhs:
+  - if (I == 0) PC
+  op:
+  - set
+  rhs:
+  - PC + k + 1
+  flags: null
+
+- id: 68
+  mnem: mov
+  desc: Copy register
+  type: data
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 69
+  mnem: movw
+  desc: Copy register pair
+  type: data
+  ops:
+  - Rd
+  - Rr
+  lhs:
+  - Rd+1:Rd
+  op:
+  - set
+  rhs:
+  - Rr+1:Rr
+  flags: null
+
+- id: 70
+  mnem: ldi
+  desc: Load immediate
+  type: data
+  ops:
+  - Rd
+  - K
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - K
+  flags: null
+
+- id: 71
+  mnem: lds
+  desc: Load direct from data space
+  type: data
+  ops:
+  - Rd
+  - k
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (k)
+  flags: null
+
+- id: 72
+  mnem: ld
+  desc: Load indirect
+  type: data
+  ops:
+  - Rd
+  - X
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (X)
+  flags: null
+
+- id: 73
+  mnem: ld
+  desc: Load indirect and post-increment
+  type: data
+  ops:
+  - Rd
+  - X+
+  lhs:
+  - Rd
+  - X
+  op:
+  - set
+  - set
+  rhs:
+  - (X)
+  - X + 1
+  flags: null
+
+- id: 74
+  mnem: ld
+  desc: Load indirect and pre-decrement
+  type: data
+  ops:
+  - Rd
+  - -X
+  lhs:
+  - X
+  - Rd
+  op:
+  - set
+  - set
+  rhs:
+  - X - 1
+  - (X)
+  flags: null
+
+- id: 75
+  mnem: ld
+  desc: Load indirect
+  type: data
+  ops:
+  - Rd
+  - Y
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (Y)
+  flags: null
+
+- id: 76
+  mnem: ld
+  desc: Load indirect and post-increment
+  type: data
+  ops:
+  - Rd
+  - Y+
+  lhs:
+  - Rd
+  - Y
+  op:
+  - set
+  - set
+  rhs:
+  - (Y)
+  - Y + 1
+  flags: null
+
+- id: 77
+  mnem: ld
+  desc: Load indirect and pre-decrement
+  type: data
+  ops:
+  - Rd
+  - -Y
+  lhs:
+  - Y
+  - Rd
+  op:
+  - set
+  - set
+  rhs:
+  - Y - 1
+  - (Y)
+  flags: null
+
+- id: 78
+  mnem: ldd
+  desc: Load indirect with displacement
+  type: data
+  ops:
+  - Rd
+  - Y+q
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (Y + q)
+  flags: null
+
+- id: 79
+  mnem: ld
+  desc: Load indirect
+  type: data
+  ops:
+  - Rd
+  - Z
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (Z)
+  flags: null
+
+- id: 80
+  mnem: ld
+  desc: Load indirect and post-increment
+  type: data
+  ops:
+  - Rd
+  - Z+
+  lhs:
+  - Rd
+  - Z
+  op:
+  - set
+  - set
+  rhs:
+  - (Z)
+  - Z+1
+  flags: null
+
+- id: 81
+  mnem: ld
+  desc: Load indirect and pre-decrement
+  type: data
+  ops:
+  - Rd
+  - -Z
+  lhs:
+  - Z
+  - Rd
+  op:
+  - set
+  - set
+  rhs:
+  - Z - 1
+  - (Z)
+  flags: null
+
+- id: 82
+  mnem: ldd
+  desc: Load indirect with displacement
+  type: data
+  ops:
+  - Rd
+  - Z+q
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (Z + q)
+  flags: null
+
+- id: 83
+  mnem: sts
+  desc: Store direct to data space
+  type: data
+  ops:
+  - k
+  - Rr
+  lhs:
+  - (k)
+  op:
+  - set
+  rhs:
+  - Rd
+  flags: null
+
+- id: 84
+  mnem: st
+  desc: Store indirect
+  type: data
+  ops:
+  - X
+  - Rr
+  lhs:
+  - (X)
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 85
+  mnem: st
+  desc: Store indirect and post-increment
+  type: data
+  ops:
+  - X+
+  - Rr
+  lhs:
+  - (X)
+  - X
+  op:
+  - set
+  - set
+  rhs:
+  - Rr
+  - X + 1
+  flags: null
+
+- id: 86
+  mnem: st
+  desc: Store indirect and pre-decrement
+  type: data
+  ops:
+  - -X
+  - Rr
+  lhs:
+  - X
+  - (X)
+  op:
+  - set
+  - set
+  rhs:
+  - X - 1
+  - Rr
+  flags: null
+
+- id: 87
+  mnem: st
+  desc: Store indirect
+  type: data
+  ops:
+  - Y
+  - Rr
+  lhs:
+  - (Y)
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 88
+  mnem: st
+  desc: Store indirect and post-increment
+  type: data
+  ops:
+  - Y+
+  - Rr
+  lhs:
+  - (Y)
+  - Y
+  op:
+  - set
+  - set
+  rhs:
+  - Rr
+  - Y + 1
+  flags: null
+
+- id: 89
+  mnem: st
+  desc: Store indirect and pre-decrement
+  type: data
+  ops:
+  - -Y
+  - Rr
+  lhs:
+  - Y
+  - (Y)
+  op:
+  - set
+  - set
+  rhs:
+  - Y - 1
+  - Rr
+  flags: null
+
+- id: 90
+  mnem: std
+  desc: Store indirect with displacement
+  type: data
+  ops:
+  - Y+q
+  - Rr
+  lhs:
+  - (Y+q)
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 91
+  mnem: st
+  desc: Store indirect
+  type: data
+  ops:
+  - Z
+  - Rr
+  lhs:
+  - (Z)
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 92
+  mnem: st
+  desc: Store indirect and post-increment
+  type: data
+  ops:
+  - Z+
+  - Rr
+  lhs:
+  - (Z)
+  - Z
+  op:
+  - set
+  - set
+  rhs:
+  - Rr
+  - Z + 1
+  flags: null
+
+- id: 93
+  mnem: st
+  desc: Store indirect and pre-decrement
+  type: data
+  ops:
+  - -Z
+  - Rr
+  lhs:
+  - Z
+  op:
+  - set
+  rhs:
+  - Z - 1
+  flags: null
+
+- id: 94
+  mnem: std
+  desc: Store indirect with displacement
+  type: data
+  ops:
+  - Z+q
+  - Rr
+  lhs:
+  - (Z+q)
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 95
+  mnem: lpm
+  desc: Load program memory
+  type: data
+  ops: null
+  lhs:
+  - R0
+  op:
+  - set
+  rhs:
+  - (Z)
+  flags: null
+
+- id: 96
+  mnem: lpm
+  desc: Load program memory
+  type: data
+  ops:
+  - Rd
+  - Z
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (Z)
+  flags: null
+
+- id: 97
+  mnem: lpm
+  desc: Load program memory and post-increment
+  type: data
+  ops:
+  - Rd
+  - Z+
+  lhs:
+  - Rd
+  - Z
+  op:
+  - set
+  - set
+  rhs:
+  - (Z)
+  - Z + 1
+  flags: null
+
+- id: 98
+  mnem: elpm
+  desc: Extended load program memory
+  type: data
+  ops: null
+  lhs:
+  - R0
+  op:
+  - set
+  rhs:
+  - (RAMPZ:Z)
+  flags: null
+
+- id: 99
+  mnem: elpm
+  desc: Extended load program memory
+  type: data
+  ops:
+  - Rd
+  - Z
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - (RAMPZ:Z)
+  flags: null
+
+- id: 100
+  mnem: elpm
+  desc: Extended load program memory and post-increment
+  type: data
+  ops:
+  - Rd
+  - Z+
+  lhs:
+  - Rd
+  - (RAMPZ:Z)
+  op:
+  - set
+  - set
+  rhs:
+  - (RAMPZ:Z)
+  - (RAMPZ:Z) + 1
+  flags: null
+
+- id: 101
+  mnem: spm
+  desc: Store program memory
+  type: data
+  ops: null
+  lhs:
+  - (RAMPZ:Z)
+  op:
+  - set
+  rhs:
+  - R1:R0
+  flags: null
+
+- id: 102
+  mnem: spm
+  desc: Store program memory and post-increment by 2
+  type: data
+  ops:
+  - Z+
+  lhs:
+  - (RAMPZ:Z)
+  - Z
+  op:
+  - set
+  - set
+  rhs:
+  - R1:R0
+  - Z + 2
+  flags: null
+
+- id: 103
+  mnem: in
+  desc: In from I/O location
+  type: data
+  ops:
+  - Rd
+  - A
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - IO(A)
+  flags: null
+
+- id: 104
+  mnem: out
+  desc: Out to I/O location
+  type: data
+  ops:
+  - A
+  - Rr
+  lhs:
+  - IO(A)
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 105
+  mnem: push
+  desc: Push register on stack
+  type: data
+  ops:
+  - Rr
+  lhs:
+  - STACK
+  op:
+  - set
+  rhs:
+  - Rr
+  flags: null
+
+- id: 106
+  mnem: pop
+  desc: Pop register from stack
+  type: data
+  ops:
+  - Rd
+  lhs:
+  - Rd
+  op:
+  - set
+  rhs:
+  - STACK
+  flags: null
+
+- id: 107
+  mnem: xch
+  desc: Exchange
+  type: data
+  ops:
+  - Z
+  - Rd
+  lhs:
+  - (Z)
+  - Rd
+  op:
+  - set
+  - set
+  rhs:
+  - Rd
+  - (Z)
+  flags: null
+
+- id: 108
+  mnem: las
+  desc: Load and set
+  type: data
+  ops:
+  - Z
+  - Rd
+  lhs:
+  - (Z)
+  - Rd
+  op:
+  - set
+  - set
+  rhs:
+  - Rd | (Z)
+  - (Z)
+  flags: null
+
+- id: 109
+  mnem: lac
+  desc: Load and clear
+  type: data
+  ops:
+  - Z
+  - Rd
+  lhs:
+  - (Z)
+  - Rd
+  op:
+  - set
+  - set
+  rhs:
+  - ($FF - Rd) & (Z)
+  - (Z)
+  flags: null
+
+- id: 110
+  mnem: lat
+  desc: Load and toggle
+  type: data
+  ops:
+  - Z
+  - Rd
+  lhs:
+  - (Z)
+  - Rd
+  op:
+  - set
+  - set
+  rhs:
+  - Rd ^ (Z)
+  - (Z)
+  flags: null
+
+- id: 111
+  mnem: lsl
+  desc: Logical shift left
+  type: bits
+  ops:
+  - Rd
+  lhs:
+  - Rd(n + 1)
+  - Rd(0)
+  - C
+  op:
+  - set
+  - set
+  - set
+  rhs:
+  - Rd(n)
+  - '0'
+  - Rd(7)
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - H
+
+- id: 112
+  mnem: lsr
+  desc: Logical shift right
+  type: bits
+  ops:
+  - Rd
+  lhs:
+  - Rd(n)
+  - Rd(7)
+  - C
+  op:
+  - set
+  - set
+  - set
+  rhs:
+  - Rd(n + 1)
+  - '0'
+  - Rd(0)
+  flags:
+  - Z
+  - C
+  - N
+  - V
+
+- id: 113
+  mnem: rol
+  desc: Rotate left through carry
+  type: bits
+  ops:
+  - Rd
+  lhs:
+  - Rd(0)
+  - Rd(n + 1)
+  - C
+  op:
+  - set
+  - set
+  - set
+  rhs:
+  - C
+  - Rd(n)
+  - Rd(7)
+  flags:
+  - Z
+  - C
+  - N
+  - V
+  - H
+
+- id: 114
+  mnem: ror
+  desc: Rotate right through carry
+  type: bits
+  ops:
+  - Rd
+  lhs:
+  - Rd(7)
+  - Rd(n)
+  - C
+  op:
+  - set
+  - set
+  - set
+  rhs:
+  - C
+  - Rd(n + 1)
+  - Rd(0)
+  flags:
+  - Z
+  - C
+  - N
+  - V
+
+- id: 115
+  mnem: asr
+  desc: Arithmetic shift right
+  type: bits
+  ops:
+  - Rd
+  lhs:
+  - Rd(n)
+  op:
+  - set
+  rhs:
+  - Rd(n + 1), n=0..6
+  flags:
+  - Z
+  - C
+  - N
+  - V
+
+- id: 116
+  mnem: swap
+  desc: Swap nibbles
+  type: bits
+  ops:
+  - Rd
+  lhs:
+  - Rd(3..0)
+  op:
+  - swap
+  rhs:
+  - Rd(7..4)
+  flags: null
+
+- id: 117
+  mnem: sbi
+  desc: Set bit in I/O register
+  type: bits
+  ops:
+  - A
+  - b
+  lhs:
+  - IO(A, b)
+  op:
+  - set
+  rhs:
+  - '1'
+  flags: null
+
+- id: 118
+  mnem: cbi
+  desc: Clear bit in I/O register
+  type: bits
+  ops:
+  - A
+  - b
+  lhs:
+  - IO(A, b)
+  op:
+  - set
+  rhs:
+  - '0'
+  flags: null
+
+- id: 119
+  mnem: bst
+  desc: Bit store from register to T
+  type: bits
+  ops:
+  - Rr
+  - b
+  lhs:
+  - T
+  op:
+  - set
+  rhs:
+  - Rr(b)
+  flags:
+  - T
+
+- id: 120
+  mnem: bld
+  desc: Bit load from T to register
+  type: bits
+  ops:
+  - Rd
+  - b
+  lhs:
+  - Rd(b)
+  op:
+  - set
+  rhs:
+  - T
+  flags: null
+
+- id: 121
+  mnem: bset
+  desc: Flag set
+  type: bits
+  ops:
+  - s
+  lhs:
+  - SREG(s)
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - SREG(s)
+
+- id: 122
+  mnem: bclr
+  desc: Flag clear
+  type: bits
+  ops:
+  - s
+  lhs:
+  - SREG(s)
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - SREG(s)
+
+- id: 123
+  mnem: sec
+  desc: Set carry
+  type: bits
+  ops: null
+  lhs:
+  - C
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - C
+
+- id: 124
+  mnem: clc
+  desc: Clear carry
+  type: bits
+  ops: null
+  lhs:
+  - C
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - C
+
+- id: 125
+  mnem: sen
+  desc: Set negative flag
+  type: bits
+  ops: null
+  lhs:
+  - N
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - N
+
+- id: 126
+  mnem: cln
+  desc: Clear negative flag
+  type: bits
+  ops: null
+  lhs:
+  - N
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - N
+
+- id: 127
+  mnem: sez
+  desc: Set zero flag
+  type: bits
+  ops: null
+  lhs:
+  - Z
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - Z
+
+- id: 128
+  mnem: clz
+  desc: Clear zero flag
+  type: bits
+  ops: null
+  lhs:
+  - Z
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - Z
+
+- id: 129
+  mnem: sei
+  desc: Global interrupt enable
+  type: bits
+  ops: null
+  lhs:
+  - I
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - I
+
+- id: 130
+  mnem: cli
+  desc: Global interrupt disable
+  type: bits
+  ops: null
+  lhs:
+  - I
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - I
+
+- id: 131
+  mnem: ses
+  desc: Set signed test flag
+  type: bits
+  ops: null
+  lhs:
+  - S
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - S
+
+- id: 132
+  mnem: cls
+  desc: Clear signed test flag
+  type: bits
+  ops: null
+  lhs:
+  - S
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - S
+
+- id: 133
+  mnem: sev
+  desc: "Set two\u2019s complement overflow"
+  type: bits
+  ops: null
+  lhs:
+  - V
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - V
+
+- id: 134
+  mnem: clv
+  desc: "Clear two\u2019s complement overflow"
+  type: bits
+  ops: null
+  lhs:
+  - V
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - V
+
+- id: 135
+  mnem: set
+  desc: Set T in SREG
+  type: bits
+  ops: null
+  lhs:
+  - T
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - T
+
+- id: 136
+  mnem: clt
+  desc: Clear T in SREG
+  type: bits
+  ops: null
+  lhs:
+  - T
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - T
+
+- id: 137
+  mnem: seh
+  desc: Set half carry flag in SREG
+  type: bits
+  ops: null
+  lhs:
+  - H
+  op:
+  - set
+  rhs:
+  - '1'
+  flags:
+  - H
+
+- id: 138
+  mnem: clh
+  desc: Clear half carry flag in SREG
+  type: bits
+  ops: null
+  lhs:
+  - H
+  op:
+  - set
+  rhs:
+  - '0'
+  flags:
+  - H
+
+- id: 139
+  mnem: break
+  desc: Break
+  type: mcu
+  ops: null
+  lhs: null
+  op: null
+  rhs: null
+  flags: null
+
+- id: 140
+  mnem: nop
+  desc: No operation
+  type: mcu
+  ops: null
+  lhs: null
+  op: null
+  rhs: null
+  flags: null
+
+- id: 141
+  mnem: sleep
+  desc: Sleep
+  type: mcu
+  ops: null
+  lhs: null
+  op: null
+  rhs: null
+  flags: null
+
+- id: 142
+  mnem: wdr
+  desc: Watchdog reset
+  type: mcu
+  ops: null
+  lhs: null
+  op: null
+  rhs: null
+  flags: null
