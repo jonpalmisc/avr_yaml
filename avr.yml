@@ -11,6 +11,7 @@
   - set
   rhs:
   - Rd + Rr
+  pattern: 000011rdddddrrrr
   flags:
   - Z
   - C
@@ -18,6 +19,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 2
   mnem: adc
@@ -32,6 +34,7 @@
   - set
   rhs:
   - Rd + Rr + C
+  pattern: 000111rdddddrrrr
   flags:
   - Z
   - C
@@ -39,6 +42,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 3
   mnem: adiw
@@ -53,12 +57,14 @@
   - set
   rhs:
   - Rd+1:Rd + K
+  pattern: 10010110KKddKKKK
   flags:
   - Z
   - C
   - N
   - V
   - S
+  words: 1
 
 - id: 4
   mnem: sub
@@ -73,6 +79,7 @@
   - set
   rhs:
   - Rd - Rr
+  pattern: 000110rdddddrrrr
   flags:
   - Z
   - C
@@ -80,6 +87,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 5
   mnem: subi
@@ -94,6 +102,7 @@
   - set
   rhs:
   - Rd - K
+  pattern: 0101KKKKddddKKKK
   flags:
   - Z
   - C
@@ -101,6 +110,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 6
   mnem: sbc
@@ -115,6 +125,7 @@
   - set
   rhs:
   - Rd - Rr - C
+  pattern: 000010rdddddrrrr
   flags:
   - Z
   - C
@@ -122,6 +133,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 7
   mnem: sbci
@@ -136,6 +148,7 @@
   - set
   rhs:
   - Rd - K - C
+  pattern: 0100KKKKddddKKKK
   flags:
   - Z
   - C
@@ -143,6 +156,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 8
   mnem: sbiw
@@ -157,12 +171,14 @@
   - set
   rhs:
   - Rd+1:Rd - K
+  pattern: 10010111KKddKKKK
   flags:
   - Z
   - C
   - N
   - V
   - S
+  words: 1
 
 - id: 9
   mnem: and
@@ -177,11 +193,13 @@
   - set
   rhs:
   - Rd & Rr
+  pattern: 001000rdddddrrrr
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 10
   mnem: andi
@@ -196,11 +214,13 @@
   - set
   rhs:
   - Rd & K
+  pattern: 0111KKKKddddKKKK
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 11
   mnem: or
@@ -215,11 +235,13 @@
   - set
   rhs:
   - Rd | Rr
+  pattern: 001010rdddddrrrr
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 12
   mnem: ori
@@ -234,11 +256,13 @@
   - set
   rhs:
   - Rd | K
+  pattern: 0110KKKKddddKKKK
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 13
   mnem: eor
@@ -253,11 +277,13 @@
   - set
   rhs:
   - Rd ^ Rr
+  pattern: 001001rdddddrrrr
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 14
   mnem: com
@@ -271,12 +297,14 @@
   - set
   rhs:
   - $FF - Rd
+  pattern: 1001010ddddd0000
   flags:
   - Z
   - C
   - N
   - V
   - S
+  words: 1
 
 - id: 15
   mnem: neg
@@ -290,6 +318,7 @@
   - set
   rhs:
   - $00 - Rd
+  pattern: 1001010ddddd0001
   flags:
   - Z
   - C
@@ -297,6 +326,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 16
   mnem: sbr
@@ -311,11 +341,13 @@
   - set
   rhs:
   - Rd | K
+  pattern: 0110KKKKddddKKKK
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 17
   mnem: cbr
@@ -330,11 +362,13 @@
   - set
   rhs:
   - Rd & ($FF - K)
+  pattern: 0111KKKKddddKKKK
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 18
   mnem: inc
@@ -348,11 +382,13 @@
   - set
   rhs:
   - Rd + 1
+  pattern: 1001010ddddd0011
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 19
   mnem: dec
@@ -366,11 +402,13 @@
   - set
   rhs:
   - Rd - 1
+  pattern: 1001010ddddd1010
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 20
   mnem: tst
@@ -384,11 +422,13 @@
   - set
   rhs:
   - Rd && Rd
+  pattern: 001000dddddddddd
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 21
   mnem: clr
@@ -402,11 +442,13 @@
   - set
   rhs:
   - Rd ^ Rd
+  pattern: 001001dddddddddd
   flags:
   - Z
   - N
   - V
   - S
+  words: 1
 
 - id: 22
   mnem: ser
@@ -420,7 +462,9 @@
   - set
   rhs:
   - $FF
+  pattern: 11101111dddd1111
   flags: null
+  words: 1
 
 - id: 23
   mnem: mul
@@ -435,9 +479,11 @@
   - set
   rhs:
   - Rd * Rr (UU)
+  pattern: 100111rdddddrrrr
   flags:
   - Z
   - C
+  words: 1
 
 - id: 24
   mnem: muls
@@ -452,9 +498,11 @@
   - set
   rhs:
   - Rd * Rr (SS)
+  pattern: 00000010ddddrrrr
   flags:
   - Z
   - C
+  words: 1
 
 - id: 25
   mnem: mulsu
@@ -469,9 +517,11 @@
   - set
   rhs:
   - Rd * Rr (SU)
+  pattern: 000000110ddd0rrr
   flags:
   - Z
   - C
+  words: 1
 
 - id: 26
   mnem: fmul
@@ -486,9 +536,11 @@
   - set
   rhs:
   - Rd * Rr << 1 (UU)
+  pattern: 000000110ddd1rrr
   flags:
   - Z
   - C
+  words: 1
 
 - id: 27
   mnem: fmuls
@@ -503,9 +555,11 @@
   - set
   rhs:
   - Rd * Rr << 1 (SS)
+  pattern: 000000111ddd0rrr
   flags:
   - Z
   - C
+  words: 1
 
 - id: 28
   mnem: fmulsu
@@ -520,9 +574,11 @@
   - set
   rhs:
   - Rd * Rr << 1 (SU)
+  pattern: 000000111ddd1rrr
   flags:
   - Z
   - C
+  words: 1
 
 - id: 29
   mnem: des
@@ -539,7 +595,9 @@
   rhs:
   - 'Encrypt(R15: R0, K)'
   - 'Decrypt(R15: R0, K)'
+  pattern: 10010100KKKK1011
   flags: null
+  words: 1
 
 - id: 30
   mnem: rjmp
@@ -553,7 +611,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 1100kkkkkkkkkkkk
   flags: null
+  words: 1
 
 - id: 31
   mnem: ijmp
@@ -569,7 +629,9 @@
   rhs:
   - Z
   - '0'
+  pattern: '1001010000001001'
   flags: null
+  words: 1
 
 - id: 32
   mnem: eijmp
@@ -585,7 +647,9 @@
   rhs:
   - Z
   - EIND
+  pattern: '1001010000011001'
   flags: null
+  words: 1
 
 - id: 33
   mnem: jmp
@@ -599,7 +663,9 @@
   - set
   rhs:
   - k
+  pattern: 1001010kkkkk110kkkkkkkkkkkkkkkkk
   flags: null
+  words: 2
 
 - id: 34
   mnem: rcall
@@ -613,7 +679,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 1101kkkkkkkkkkkk
   flags: null
+  words: 1
 
 - id: 35
   mnem: icall
@@ -629,7 +697,9 @@
   rhs:
   - Z
   - '0'
+  pattern: '1001010100001001'
   flags: null
+  words: 1
 
 - id: 36
   mnem: eicall
@@ -645,7 +715,9 @@
   rhs:
   - Z
   - EIND
+  pattern: '1001010100011001'
   flags: null
+  words: 1
 
 - id: 37
   mnem: call
@@ -659,7 +731,9 @@
   - set
   rhs:
   - k
+  pattern: 1001010kkkkk111kkkkkkkkkkkkkkkkk
   flags: null
+  words: 2
 
 - id: 38
   mnem: ret
@@ -672,7 +746,9 @@
   - set
   rhs:
   - STACK
+  pattern: '1001010100001000'
   flags: null
+  words: 1
 
 - id: 39
   mnem: reti
@@ -685,8 +761,10 @@
   - set
   rhs:
   - STACK
+  pattern: '1001010100011000'
   flags:
   - I
+  words: 1
 
 - id: 40
   mnem: cpse
@@ -701,7 +779,9 @@
   - set
   rhs:
   - PC + (2 or 3)
+  pattern: 000100rdddddrrrr
   flags: null
+  words: 1
 
 - id: 41
   mnem: cp
@@ -714,6 +794,7 @@
   - Rd - Rr
   op: null
   rhs: null
+  pattern: 000101rdddddrrrr
   flags:
   - Z
   - C
@@ -721,6 +802,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 42
   mnem: cpc
@@ -733,6 +815,7 @@
   - Rd - Rr - C
   op: null
   rhs: null
+  pattern: 000001rdddddrrrr
   flags:
   - Z
   - C
@@ -740,6 +823,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 43
   mnem: cpi
@@ -752,6 +836,7 @@
   - Rd - K
   op: null
   rhs: null
+  pattern: 0011KKKKddddKKKK
   flags:
   - Z
   - C
@@ -759,6 +844,7 @@
   - V
   - S
   - H
+  words: 1
 
 - id: 44
   mnem: sbrc
@@ -773,7 +859,9 @@
   - set
   rhs:
   - PC + (2 or 3)
+  pattern: 1111110rrrrr0bbb
   flags: null
+  words: 1
 
 - id: 45
   mnem: sbrs
@@ -788,7 +876,9 @@
   - set
   rhs:
   - PC + (2 or 3)
+  pattern: 1111111rrrrr0bbb
   flags: null
+  words: 1
 
 - id: 46
   mnem: sbic
@@ -803,7 +893,9 @@
   - set
   rhs:
   - PC + (2 or 3)
+  pattern: 10011001AAAAAbbb
   flags: null
+  words: 1
 
 - id: 47
   mnem: sbis
@@ -818,7 +910,9 @@
   - set
   rhs:
   - PC + (2 or 3)
+  pattern: 10011011AAAAAbbb
   flags: null
+  words: 1
 
 - id: 48
   mnem: brbs
@@ -833,7 +927,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkksss
   flags: null
+  words: 1
 
 - id: 49
   mnem: brbc
@@ -848,7 +944,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkksss
   flags: null
+  words: 1
 
 - id: 50
   mnem: breq
@@ -862,7 +960,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk001
   flags: null
+  words: 1
 
 - id: 51
   mnem: brne
@@ -876,7 +976,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk001
   flags: null
+  words: 1
 
 - id: 52
   mnem: brcs
@@ -890,7 +992,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk000
   flags: null
+  words: 1
 
 - id: 53
   mnem: brcc
@@ -904,7 +1008,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk000
   flags: null
+  words: 1
 
 - id: 54
   mnem: brsh
@@ -918,7 +1024,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk000
   flags: null
+  words: 1
 
 - id: 55
   mnem: brlo
@@ -932,7 +1040,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk000
   flags: null
+  words: 1
 
 - id: 56
   mnem: brmi
@@ -946,7 +1056,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk010
   flags: null
+  words: 1
 
 - id: 57
   mnem: brpl
@@ -960,7 +1072,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk010
   flags: null
+  words: 1
 
 - id: 58
   mnem: brge
@@ -974,7 +1088,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk100
   flags: null
+  words: 1
 
 - id: 59
   mnem: brlt
@@ -988,7 +1104,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk100
   flags: null
+  words: 1
 
 - id: 60
   mnem: brhs
@@ -1002,7 +1120,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk101
   flags: null
+  words: 1
 
 - id: 61
   mnem: brhc
@@ -1016,7 +1136,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk101
   flags: null
+  words: 1
 
 - id: 62
   mnem: brts
@@ -1030,7 +1152,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk110
   flags: null
+  words: 1
 
 - id: 63
   mnem: brtc
@@ -1044,7 +1168,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk110
   flags: null
+  words: 1
 
 - id: 64
   mnem: brvs
@@ -1058,7 +1184,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk011
   flags: null
+  words: 1
 
 - id: 65
   mnem: brvc
@@ -1072,7 +1200,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk011
   flags: null
+  words: 1
 
 - id: 66
   mnem: brie
@@ -1086,7 +1216,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111100kkkkkkk111
   flags: null
+  words: 1
 
 - id: 67
   mnem: brid
@@ -1100,7 +1232,9 @@
   - set
   rhs:
   - PC + k + 1
+  pattern: 111101kkkkkkk111
   flags: null
+  words: 1
 
 - id: 68
   mnem: mov
@@ -1115,7 +1249,9 @@
   - set
   rhs:
   - Rr
+  pattern: 001011rdddddrrrr
   flags: null
+  words: 1
 
 - id: 69
   mnem: movw
@@ -1130,7 +1266,9 @@
   - set
   rhs:
   - Rr+1:Rr
+  pattern: 00000001ddddrrrr
   flags: null
+  words: 1
 
 - id: 70
   mnem: ldi
@@ -1145,7 +1283,9 @@
   - set
   rhs:
   - K
+  pattern: 1110KKKKddddKKKK
   flags: null
+  words: 1
 
 - id: 71
   mnem: lds
@@ -1160,7 +1300,9 @@
   - set
   rhs:
   - (k)
+  pattern: 1001000ddddd0000kkkkkkkkkkkkkkkk
   flags: null
+  words: 2
 
 - id: 72
   mnem: ld
@@ -1175,7 +1317,9 @@
   - set
   rhs:
   - (X)
+  pattern: 1001000ddddd1100
   flags: null
+  words: 1
 
 - id: 73
   mnem: ld
@@ -1193,7 +1337,9 @@
   rhs:
   - (X)
   - X + 1
+  pattern: 1001000ddddd1101
   flags: null
+  words: 1
 
 - id: 74
   mnem: ld
@@ -1211,7 +1357,9 @@
   rhs:
   - X - 1
   - (X)
+  pattern: 1001000ddddd1110
   flags: null
+  words: 1
 
 - id: 75
   mnem: ld
@@ -1226,7 +1374,9 @@
   - set
   rhs:
   - (Y)
+  pattern: 1000000ddddd1000
   flags: null
+  words: 1
 
 - id: 76
   mnem: ld
@@ -1244,7 +1394,9 @@
   rhs:
   - (Y)
   - Y + 1
+  pattern: 1001000ddddd1001
   flags: null
+  words: 1
 
 - id: 77
   mnem: ld
@@ -1262,7 +1414,9 @@
   rhs:
   - Y - 1
   - (Y)
+  pattern: 1001000ddddd1010
   flags: null
+  words: 1
 
 - id: 78
   mnem: ldd
@@ -1277,7 +1431,9 @@
   - set
   rhs:
   - (Y + q)
+  pattern: 1001000ddddd0010
   flags: null
+  words: 1
 
 - id: 79
   mnem: ld
@@ -1292,7 +1448,9 @@
   - set
   rhs:
   - (Z)
+  pattern: 10q0qq0ddddd1qqq
   flags: null
+  words: 1
 
 - id: 80
   mnem: ld
@@ -1310,7 +1468,9 @@
   rhs:
   - (Z)
   - Z+1
+  pattern: 1000000ddddd0000
   flags: null
+  words: 1
 
 - id: 81
   mnem: ld
@@ -1328,7 +1488,9 @@
   rhs:
   - Z - 1
   - (Z)
+  pattern: 1001000ddddd0001
   flags: null
+  words: 1
 
 - id: 82
   mnem: ldd
@@ -1343,7 +1505,9 @@
   - set
   rhs:
   - (Z + q)
+  pattern: 10q0qq0ddddd0qqq
   flags: null
+  words: 1
 
 - id: 83
   mnem: sts
@@ -1358,7 +1522,9 @@
   - set
   rhs:
   - Rd
+  pattern: 1001001ddddd0000kkkkkkkkkkkkkkkk
   flags: null
+  words: 2
 
 - id: 84
   mnem: st
@@ -1373,7 +1539,9 @@
   - set
   rhs:
   - Rr
+  pattern: 1001001rrrrr1100
   flags: null
+  words: 1
 
 - id: 85
   mnem: st
@@ -1391,7 +1559,9 @@
   rhs:
   - Rr
   - X + 1
+  pattern: 1001001rrrrr1101
   flags: null
+  words: 1
 
 - id: 86
   mnem: st
@@ -1409,7 +1579,9 @@
   rhs:
   - X - 1
   - Rr
+  pattern: 1001001rrrrr1110
   flags: null
+  words: 1
 
 - id: 87
   mnem: st
@@ -1424,7 +1596,9 @@
   - set
   rhs:
   - Rr
+  pattern: 1000001rrrrr1000
   flags: null
+  words: 1
 
 - id: 88
   mnem: st
@@ -1442,7 +1616,9 @@
   rhs:
   - Rr
   - Y + 1
+  pattern: 1001001rrrrr1001
   flags: null
+  words: 1
 
 - id: 89
   mnem: st
@@ -1460,7 +1636,9 @@
   rhs:
   - Y - 1
   - Rr
+  pattern: 1001001rrrrr1010
   flags: null
+  words: 1
 
 - id: 90
   mnem: std
@@ -1475,7 +1653,9 @@
   - set
   rhs:
   - Rr
+  pattern: 10q0qq1rrrrr1qqq
   flags: null
+  words: 1
 
 - id: 91
   mnem: st
@@ -1490,7 +1670,9 @@
   - set
   rhs:
   - Rr
+  pattern: 1000001rrrrr0000
   flags: null
+  words: 1
 
 - id: 92
   mnem: st
@@ -1508,7 +1690,9 @@
   rhs:
   - Rr
   - Z + 1
+  pattern: 1001001rrrrr0001
   flags: null
+  words: 1
 
 - id: 93
   mnem: st
@@ -1523,7 +1707,9 @@
   - set
   rhs:
   - Z - 1
+  pattern: 1001001rrrrr0010
   flags: null
+  words: 1
 
 - id: 94
   mnem: std
@@ -1538,7 +1724,9 @@
   - set
   rhs:
   - Rr
+  pattern: 10q0qq1rrrrr0qqq
   flags: null
+  words: 1
 
 - id: 95
   mnem: lpm
@@ -1551,7 +1739,9 @@
   - set
   rhs:
   - (Z)
+  pattern: '1001010111001000'
   flags: null
+  words: 1
 
 - id: 96
   mnem: lpm
@@ -1566,7 +1756,9 @@
   - set
   rhs:
   - (Z)
+  pattern: 1001000ddddd0100
   flags: null
+  words: 1
 
 - id: 97
   mnem: lpm
@@ -1584,7 +1776,9 @@
   rhs:
   - (Z)
   - Z + 1
+  pattern: 1001000ddddd0101
   flags: null
+  words: 1
 
 - id: 98
   mnem: elpm
@@ -1597,7 +1791,9 @@
   - set
   rhs:
   - (RAMPZ:Z)
+  pattern: '1001010111011000'
   flags: null
+  words: 1
 
 - id: 99
   mnem: elpm
@@ -1612,7 +1808,9 @@
   - set
   rhs:
   - (RAMPZ:Z)
+  pattern: 1001000ddddd0110
   flags: null
+  words: 1
 
 - id: 100
   mnem: elpm
@@ -1630,7 +1828,9 @@
   rhs:
   - (RAMPZ:Z)
   - (RAMPZ:Z) + 1
+  pattern: 1001000ddddd0111
   flags: null
+  words: 1
 
 - id: 101
   mnem: spm
@@ -1643,7 +1843,9 @@
   - set
   rhs:
   - R1:R0
+  pattern: '1001010111101000'
   flags: null
+  words: 1
 
 - id: 102
   mnem: spm
@@ -1660,7 +1862,9 @@
   rhs:
   - R1:R0
   - Z + 2
+  pattern: '1001010111111000'
   flags: null
+  words: 1
 
 - id: 103
   mnem: in
@@ -1675,7 +1879,9 @@
   - set
   rhs:
   - IO(A)
+  pattern: 10110AAdddddAAAA
   flags: null
+  words: 1
 
 - id: 104
   mnem: out
@@ -1690,7 +1896,9 @@
   - set
   rhs:
   - Rr
+  pattern: 10111AArrrrrAAAA
   flags: null
+  words: 1
 
 - id: 105
   mnem: push
@@ -1704,7 +1912,9 @@
   - set
   rhs:
   - Rr
+  pattern: 1001001ddddd1111
   flags: null
+  words: 1
 
 - id: 106
   mnem: pop
@@ -1718,7 +1928,9 @@
   - set
   rhs:
   - STACK
+  pattern: 1001000ddddd1111
   flags: null
+  words: 1
 
 - id: 107
   mnem: xch
@@ -1736,7 +1948,9 @@
   rhs:
   - Rd
   - (Z)
+  pattern: 1001001rrrrr0100
   flags: null
+  words: 1
 
 - id: 108
   mnem: las
@@ -1754,7 +1968,9 @@
   rhs:
   - Rd | (Z)
   - (Z)
+  pattern: 1001001rrrrr0101
   flags: null
+  words: 1
 
 - id: 109
   mnem: lac
@@ -1772,7 +1988,9 @@
   rhs:
   - ($FF - Rd) & (Z)
   - (Z)
+  pattern: 1001001rrrrr0110
   flags: null
+  words: 1
 
 - id: 110
   mnem: lat
@@ -1790,7 +2008,9 @@
   rhs:
   - Rd ^ (Z)
   - (Z)
+  pattern: 1001001rrrrr0111
   flags: null
+  words: 1
 
 - id: 111
   mnem: lsl
@@ -1810,12 +2030,14 @@
   - Rd(n)
   - '0'
   - Rd(7)
+  pattern: 000011dddddddddd
   flags:
   - Z
   - C
   - N
   - V
   - H
+  words: 1
 
 - id: 112
   mnem: lsr
@@ -1835,11 +2057,13 @@
   - Rd(n + 1)
   - '0'
   - Rd(0)
+  pattern: 1001010ddddd0110
   flags:
   - Z
   - C
   - N
   - V
+  words: 1
 
 - id: 113
   mnem: rol
@@ -1859,12 +2083,14 @@
   - C
   - Rd(n)
   - Rd(7)
+  pattern: 000111dddddddddd
   flags:
   - Z
   - C
   - N
   - V
   - H
+  words: 1
 
 - id: 114
   mnem: ror
@@ -1884,11 +2110,13 @@
   - C
   - Rd(n + 1)
   - Rd(0)
+  pattern: 1001010ddddd0111
   flags:
   - Z
   - C
   - N
   - V
+  words: 1
 
 - id: 115
   mnem: asr
@@ -1902,11 +2130,13 @@
   - set
   rhs:
   - Rd(n + 1), n=0..6
+  pattern: 1001010ddddd0101
   flags:
   - Z
   - C
   - N
   - V
+  words: 1
 
 - id: 116
   mnem: swap
@@ -1920,7 +2150,9 @@
   - swap
   rhs:
   - Rd(7..4)
+  pattern: 1001010ddddd0010
   flags: null
+  words: 1
 
 - id: 117
   mnem: sbi
@@ -1935,7 +2167,9 @@
   - set
   rhs:
   - '1'
+  pattern: 10011010AAAAAbbb
   flags: null
+  words: 1
 
 - id: 118
   mnem: cbi
@@ -1950,7 +2184,9 @@
   - set
   rhs:
   - '0'
+  pattern: 10011000AAAAAbbb
   flags: null
+  words: 1
 
 - id: 119
   mnem: bst
@@ -1965,8 +2201,10 @@
   - set
   rhs:
   - Rr(b)
+  pattern: 1111101ddddd0bbb
   flags:
   - T
+  words: 1
 
 - id: 120
   mnem: bld
@@ -1981,7 +2219,9 @@
   - set
   rhs:
   - T
+  pattern: 1111100ddddd0bbb
   flags: null
+  words: 1
 
 - id: 121
   mnem: bset
@@ -1995,8 +2235,10 @@
   - set
   rhs:
   - '1'
+  pattern: 100101000sss1000
   flags:
   - SREG(s)
+  words: 1
 
 - id: 122
   mnem: bclr
@@ -2010,8 +2252,10 @@
   - set
   rhs:
   - '0'
+  pattern: 100101001sss1000
   flags:
   - SREG(s)
+  words: 1
 
 - id: 123
   mnem: sec
@@ -2024,8 +2268,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010000001000'
   flags:
   - C
+  words: 1
 
 - id: 124
   mnem: clc
@@ -2038,8 +2284,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010010001000'
   flags:
   - C
+  words: 1
 
 - id: 125
   mnem: sen
@@ -2052,8 +2300,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010000101000'
   flags:
   - N
+  words: 1
 
 - id: 126
   mnem: cln
@@ -2066,8 +2316,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010010101000'
   flags:
   - N
+  words: 1
 
 - id: 127
   mnem: sez
@@ -2080,8 +2332,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010000011000'
   flags:
   - Z
+  words: 1
 
 - id: 128
   mnem: clz
@@ -2094,8 +2348,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010010011000'
   flags:
   - Z
+  words: 1
 
 - id: 129
   mnem: sei
@@ -2108,8 +2364,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010001111000'
   flags:
   - I
+  words: 1
 
 - id: 130
   mnem: cli
@@ -2122,8 +2380,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010011111000'
   flags:
   - I
+  words: 1
 
 - id: 131
   mnem: ses
@@ -2136,8 +2396,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010001001000'
   flags:
   - S
+  words: 1
 
 - id: 132
   mnem: cls
@@ -2150,8 +2412,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010011001000'
   flags:
   - S
+  words: 1
 
 - id: 133
   mnem: sev
@@ -2164,8 +2428,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010000111000'
   flags:
   - V
+  words: 1
 
 - id: 134
   mnem: clv
@@ -2178,8 +2444,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010010111000'
   flags:
   - V
+  words: 1
 
 - id: 135
   mnem: set
@@ -2192,8 +2460,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010001101000'
   flags:
   - T
+  words: 1
 
 - id: 136
   mnem: clt
@@ -2206,8 +2476,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010011101000'
   flags:
   - T
+  words: 1
 
 - id: 137
   mnem: seh
@@ -2220,8 +2492,10 @@
   - set
   rhs:
   - '1'
+  pattern: '1001010001011000'
   flags:
   - H
+  words: 1
 
 - id: 138
   mnem: clh
@@ -2234,8 +2508,10 @@
   - set
   rhs:
   - '0'
+  pattern: '1001010011011000'
   flags:
   - H
+  words: 1
 
 - id: 139
   mnem: break
@@ -2245,7 +2521,9 @@
   lhs: null
   op: null
   rhs: null
+  pattern: '1001010110011000'
   flags: null
+  words: 1
 
 - id: 140
   mnem: nop
@@ -2255,7 +2533,9 @@
   lhs: null
   op: null
   rhs: null
+  pattern: '0000000000000000'
   flags: null
+  words: 1
 
 - id: 141
   mnem: sleep
@@ -2265,7 +2545,9 @@
   lhs: null
   op: null
   rhs: null
+  pattern: '1001010110001000'
   flags: null
+  words: 1
 
 - id: 142
   mnem: wdr
@@ -2275,4 +2557,6 @@
   lhs: null
   op: null
   rhs: null
+  pattern: '1001010110101000'
   flags: null
+  words: 1
