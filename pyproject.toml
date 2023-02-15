@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "avr-data"
+version = "0.1.0"
+description = ""
+authors = ["Jon Palmisciano <jp@jonpalmisc.com>"]
+readme = "README.md"
+packages = [{include = "avr_data"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pypdf = "^3.4.1"
+numbers-parser = "^3.9.5"
+pandas = "^1.5.3"
+pyyaml = "^6.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

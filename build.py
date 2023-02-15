@@ -1,43 +1,81 @@
 #!/usr/bin/env python3
 
-from typing import List, Optional
-
-import csv
-import re
+from numbers_parser import Document
+import pandas as pd
 import yaml
+
+import re
+import sys
+
+
+def encoding_to_mask(encoding: str) -> int:
+    m = 0
+    for c in encoding:
+        m <<= 1
+        if c == "1" or c == "0":
+            m |= 1
+    return m
+
+
+def encoding_to_pattern(encoding: str) -> int:
+    t = 0
+    for c in encoding:
+        t <<= 1
+        if c == "1" or c == "0":
+            t |= 1 if c == "1" else 0
+    return t
+
+
+def encoding_to_constraint(encoding: str) -> str:
+    k = ""
+    for c in encoding:
+        if c == "1" or c == "0":
+            k += "-"
+        else:
+            k += c
+    return k
+
+
+if len(sys.argv) < 2:
+    sys.exit(1)
+
+doc = Document(sys.argv[1])
+data = doc.sheets[0].tables[0].rows(values_only=True)
+df = pd.DataFrame(data[1:], columns=data[0])
 
 output = []
 
-def split(s: str, d: str) -> Optional[List[str]]:
-    """
-    Split a string by a given delimiter. Will return `None` if the input string
-    is an empty string.
-    """
+for i, row in df.iterrows():
+    e = {}
+    e["id"] = i
+    e["mnemonic"] = row["mnemonic"]
+    e["description"] = row["description"]
+    e["operands"] = [o.strip() for o in (row["operands"] or "").split(",")]
 
-    if len(s) == 0:
-        return None
+    e["variant"] = row["variant"]
+    e["lhs"] = (row["lhs"] or "").splitlines()
+    e["op"] = row["op"]
+    e["rhs"] = (row["rhs"] or "").splitlines()
 
-    return [p.strip() for p in s.split(d)]
+    e["flags"] = [c for c in (row["flags"] or "")]
 
-with open("data/avr.csv") as file:
-    for row in csv.DictReader(file, delimiter=","):
-        entry = {}
-        entry["id"] = int(row["id"])
-        entry["mnem"] = row["mnem"]
-        entry["desc"] = row["desc"]
-        entry["type"] = row["type"]
-        entry["ops"] = split(row["ops"], ',')
-        entry["lhs"] = split(row["lhs"], ';')
-        entry["op"] = split(row["op"], ';')
-        entry["rhs"] = split(row["rhs"], ';')
-        entry["pattern"] = row["pattern"]
-        entry["flags"] = split(row["flags"], ',')
-        entry["words"] = int(row["words"])
+    e["encoding"] = row["encoding"]
+    e["mask"] = encoding_to_mask(e["encoding"])
+    e["pattern"] = encoding_to_pattern(e["encoding"])
+    e["constraint"] = encoding_to_constraint(e["encoding"])
+    e["width"] = row["width"]
 
-        output.append(entry)
+    e["cycles"] = {
+        "e": row["avr_e"],
+        "xm": row["avr_xm"],
+        "xt": row["avr_xt"],
+        "rc": row["avr_rc"],
+    }
+
+    output.append(e)
 
 output = yaml.dump(output, sort_keys=False)
-output = re.sub(r'^-', '\n-', output, flags=re.MULTILINE)
+output = re.sub(r"^-", "\n-", output, flags=re.MULTILINE)
 output = "\n".join(output.splitlines()[1:])
 
 print(output)
